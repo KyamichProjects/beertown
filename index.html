@@ -106,11 +106,16 @@
 
         /* Logo */
         .logo-image {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 30px;
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 40px;
             animation: logoFloat 3s ease-in-out infinite;
-            filter: drop-shadow(0 10px 30px rgba(255, 217, 61, 0.4));
+            filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.3));
+            border-radius: 20px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px;
         }
 
         .logo-image img {
@@ -121,10 +126,10 @@
 
         @keyframes logoFloat {
             0%, 100% {
-                transform: translateY(0px);
+                transform: translateY(0px) rotate(0deg);
             }
             50% {
-                transform: translateY(-15px);
+                transform: translateY(-20px) rotate(2deg);
             }
         }
 
@@ -808,8 +813,10 @@
             }
 
             .logo-image {
-                width: 90px;
-                height: 90px;
+                width: 140px;
+                height: 140px;
+                margin: 0 auto 30px;
+                padding: 12px;
             }
 
             .hero-image {
@@ -898,8 +905,10 @@
             }
 
             .logo-image {
-                width: 80px;
-                height: 80px;
+                width: 120px;
+                height: 120px;
+                margin: 0 auto 25px;
+                padding: 10px;
             }
 
             .hero-image {
@@ -979,7 +988,7 @@
             </div>
             <h1 class="logo-title">Beer Town</h1>
             <div class="hero-image">
-                <img src="main.png" alt="Beer Town" onerror="this.parentElement.style.background='linear-gradient(135deg, #FFD93D 0%, #F4B400 100%)'">
+                <img src="https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/7bcede81480782782be7240737a39480.jpg" alt="Beer Town" onerror="this.parentElement.style.background='linear-gradient(135deg, #FFD93D 0%, #F4B400 100%)'">
             </div>
             <p class="tagline" data-translate="tagline">Ən yaxşı pivə və dadlı yeməklər</p>
         </div>
@@ -995,11 +1004,23 @@
                 </div>
                 <h3 class="menu-item-name" data-translate="menu1">Setlər</h3>
             </div>
-            <div class="menu-item" data-menu="main">
+            <div class="menu-item" data-menu="sac">
                 <div class="menu-item-image">
-                    <img src="https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/0aed78195b3ee34898c6eb6a5cbb6a00.jpg" alt="Əsas yeməklər">
+                    <img src="https://cafecity.az/media/product_image/%D0%A1%D0%B0%D0%B4%D0%B6-%D1%81-%D1%86%D1%8B%D0%BF%D0%BB%D0%B5%D0%BD%D0%BA%D0%BE%D0%BC.png.600x600_q85_box-0%2C0%2C1200%2C1200_crop_detail.jpg" alt="Sac Yeməklər">
                 </div>
-                <h3 class="menu-item-name" data-translate="menu2">Əsas yeməklər</h3>
+                <h3 class="menu-item-name" data-translate="menu2">Sac Yeməklər</h3>
+            </div>
+            <div class="menu-item" data-menu="kebab">
+                <div class="menu-item-image">
+                    <img src="https://chudobludo.com/1663400190c63b1e96cb76f7afa72973.jpeg" alt="Kabablar">
+                </div>
+                <h3 class="menu-item-name" data-translate="menuKebab">Kabablar</h3>
+            </div>
+            <div class="menu-item" data-menu="qazan">
+                <div class="menu-item-image">
+                    <img src="https://saglamolun.az/images/stories/Maraqlixeber/tava_ziyanli_002.jpg" alt="Qazan yeməkləri">
+                </div>
+                <h3 class="menu-item-name" data-translate="menuQazan">Qazan yeməkləri</h3>
             </div>
             <div class="menu-item" data-menu="soups">
                 <div class="menu-item-image">
@@ -1125,7 +1146,9 @@
                 tagline: 'Ən yaxşı pivə və dadlı yeməklər',
                 menuTitle: 'Menyumuzda',
                 menu1: 'Setlər',
-                menu2: 'Əsas yeməklər',
+                menu2: 'Sac Yeməklər',
+                menuKebab: 'Kabablar',
+                menuQazan: 'Qazan yeməkləri',
                 menu3: 'Şorbalar',
                 menu4: 'Soyuq içkilər',
                 menu5: 'Pivələr',
@@ -1148,7 +1171,9 @@
                 tagline: 'Лучшее пиво и вкусная еда',
                 menuTitle: 'В нашем меню',
                 menu1: 'Наборы',
-                menu2: 'Основные блюда',
+                menu2: 'Блюда в садже',
+                menuKebab: 'Шашлыки',
+                menuQazan: 'Блюда в казане',
                 menu3: 'Супы',
                 menu4: 'Холодные напитки',
                 menu5: 'Пиво',
@@ -1171,7 +1196,9 @@
                 tagline: 'The best beer and delicious food',
                 menuTitle: 'On the Menu',
                 menu1: 'Sets',
-                menu2: 'Main Dishes',
+                menu2: 'Sac Dishes',
+                menuKebab: 'Kebabs',
+                menuQazan: 'Qazan Dishes',
                 menu3: 'Soups',
                 menu4: 'Cold Drinks',
                 menu5: 'Beers',
@@ -1191,10 +1218,12 @@
         // Menu detail images mapping
         const menuImages = {
             'setler': 'https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/23fece1b59332bcc97b1c03914147414.jpg',
-            'main': 'https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/068b7b554f1fa06ebd3850e71e0f80ba.jpg',
+            'sac': 'https://i.imgur.com/vqp3Y1f.jpeg',
+            'kebab': 'https://i.imgur.com/0a4mgN1.jpeg',
+            'qazan': 'https://i.imgur.com/yPIEz5n.jpeg',
             'soups': 'https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/b6e097605b844737711d80a254d826fe.jpg',
             'cold': 'https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/365622c6ff26d06dd2de770c5aa35a03.jpg',
-            'beer': 'https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/f85c658ca7779fc017b323c301de0175.jpg',
+            'beer': 'https://i.imgur.com/oui39Y5.png',
             'spirits': 'https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/f55ab129dc9cb4a0df78c309c309ddbd.jpg',
             'salads': 'https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/56692ab375af8d9c7192fcceb32edb8c.jpg',
             'snacks': 'https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/839d8d68fa1ae20cbbb75520f2e97463.jpg',
