@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="az" style="scroll-behavior: smooth;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beer Town - The Sunday Bite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Urbanist:wght@300;400;600;700&family=Manrope:wght@300;400;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @font-face {
+            font-family: 'AzerbaijaniFont';
+            src: local('Arial'), local('Helvetica'), local('sans-serif');
+            unicode-range: U+0259;
+        }
+
+        :root {
+            --primary-yellow: #FFD93D;
+            --dark-yellow: #F4B400;
+            --deep-black: #1a1a1a;
+            --soft-black: #2d2d2d;
+            --white: #ffffff;
+            --gradient-1: linear-gradient(135deg, #FFD93D 0%, #F4B400 100%);
+            --gradient-2: linear-gradient(45deg, #FFE66D 0%, #FFD93D 50%, #F4B400 100%);
+        }
+
+        body {
+            font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: var(--deep-black);
+            color: var(--white);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            position: relative;
+        }
+
+        /* Rain Animation */
+        .raindrop {
+            position: fixed;
+            top: -50px;
+            z-index: 1;
+            user-select: none;
+            cursor: default;
+            animation-name: rainfall;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        .raindrop::before {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 25px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 217, 61, 0.9), rgba(255, 217, 61, 0.6));
+            border-radius: 2px;
+            box-shadow: 0 0 8px rgba(255, 217, 61, 0.8);
+        }
+
+        @keyframes rainfall {
+            0% {
+                transform: translateY(0vh);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh);
+                opacity: 0;
+            }
+        }
+
+        .raindrop:nth-of-type(0) { left: 2%; animation-delay: 0s; animation-duration: 0.8s; }
+        .raindrop:nth-of-type(1) { left: 8%; animation-delay: 0.2s; animation-duration: 0.9s; }
+        .raindrop:nth-of-type(2) { left: 15%; animation-delay: 0.5s; animation-duration: 0.7s; }
+        .raindrop:nth-of-type(3) { left: 22%; animation-delay: 0.1s; animation-duration: 0.85s; }
+        .raindrop:nth-of-type(4) { left: 30%; animation-delay: 0.4s; animation-duration: 0.75s; }
+        .raindrop:nth-of-type(5) { left: 38%; animation-delay: 0.6s; animation-duration: 0.95s; }
+        .raindrop:nth-of-type(6) { left: 45%; animation-delay: 0.3s; animation-duration: 0.8s; }
+        .raindrop:nth-of-type(7) { left: 52%; animation-delay: 0.7s; animation-duration: 0.9s; }
+        .raindrop:nth-of-type(8) { left: 60%; animation-delay: 0.15s; animation-duration: 0.85s; }
+        .raindrop:nth-of-type(9) { left: 68%; animation-delay: 0.45s; animation-duration: 0.75s; }
+        .raindrop:nth-of-type(10) { left: 75%; animation-delay: 0.25s; animation-duration: 0.8s; }
+        .raindrop:nth-of-type(11) { left: 82%; animation-delay: 0.55s; animation-duration: 0.9s; }
+        .raindrop:nth-of-type(12) { left: 90%; animation-delay: 0.35s; animation-duration: 0.85s; }
+        .raindrop:nth-of-type(13) { left: 96%; animation-delay: 0.65s; animation-duration: 0.7s; }
+        .raindrop:nth-of-type(14) { left: 5%; animation-delay: 0.8s; animation-duration: 0.95s; }
+        .raindrop:nth-of-type(15) { left: 12%; animation-delay: 0.5s; animation-duration: 0.75s; }
+        .raindrop:nth-of-type(16) { left: 25%; animation-delay: 0.3s; animation-duration: 0.85s; }
+        .raindrop:nth-of-type(17) { left: 35%; animation-delay: 0.1s; animation-duration: 0.8s; }
+        .raindrop:nth-of-type(18) { left: 48%; animation-delay: 0.6s; animation-duration: 0.9s; }
+        .raindrop:nth-of-type(19) { left: 55%; animation-delay: 0.2s; animation-duration: 0.75s; }
+        .raindrop:nth-of-type(20) { left: 65%; animation-delay: 0.4s; animation-duration: 0.85s; }
+        .raindrop:nth-of-type(21) { left: 72%; animation-delay: 0.7s; animation-duration: 0.8s; }
+        .raindrop:nth-of-type(22) { left: 85%; animation-delay: 0.15s; animation-duration: 0.9s; }
+        .raindrop:nth-of-type(23) { left: 93%; animation-delay: 0.45s; animation-duration: 0.75s; }
+
+        /* Logo */
+        .logo-image {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            animation: logoFloat 3s ease-in-out infinite;
+            filter: drop-shadow(0 10px 30px rgba(255, 217, 61, 0.4));
+        }
+
+        .logo-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 1200px;
+            max-height: 90vh;
+            margin: 20px auto;
+            background: var(--soft-black);
+            border-radius: 25px;
+            overflow: hidden;
+            border: 3px solid var(--primary-yellow);
+            box-shadow: 0 30px 90px rgba(255, 217, 61, 0.4);
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: modalBounce 0.6s ease-out forwards;
+        }
+
+        @keyframes modalBounce {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            60% {
+                transform: scale(1.05);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-image-container {
+            width: 100%;
+            max-height: 85vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            background: var(--deep-black);
+            min-height: 500px;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            background: var(--gradient-1);
+            color: var(--deep-black);
+            border: none;
+            padding: 15px 35px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 217, 61, 0.4);
+            transition: all 0.3s ease;
+            z-index: 10001;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 217, 61, 0.6);
+        }
+
+        .back-button:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        .back-button::before {
+            content: '←';
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Make menu items clickable */
+        .menu-item {
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            position: fixed;
+            top: 25px;
+            right: 30px;
+            z-index: 1000;
+            display: flex;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 8px 12px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 217, 61, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: slideInRight 0.6s ease-out;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Navigation Menu */
+        .nav-menu {
+            position: fixed;
+            top: 25px;
+            left: 30px;
+            z-index: 1000;
+            display: flex;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 12px 25px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 217, 61, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            animation: slideInLeft 0.6s ease-out;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .nav-item {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--deep-black);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 8px 15px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .nav-item:hover {
+            background: var(--gradient-1);
+            color: var(--deep-black);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 217, 61, 0.4);
+        }
+
+        .lang-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .lang-btn:hover {
+            transform: scale(1.1);
+            border-color: var(--primary-yellow);
+            background: rgba(255, 217, 61, 0.2);
+        }
+
+        .lang-btn.active {
+            border-color: var(--primary-yellow);
+            background: var(--gradient-1);
+            box-shadow: 0 0 20px rgba(255, 217, 61, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            background: var(--gradient-2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 217, 61, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(244, 180, 0, 0.3) 0%, transparent 50%);
+            animation: pulseGlow 8s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .logo-title {
+            font-family: 'Righteous', cursive;
+            font-size: clamp(3.5rem, 12vw, 9rem);
+            color: var(--deep-black);
+            text-shadow: 
+                3px 3px 0 rgba(255, 255, 255, 0.3),
+                6px 6px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+            animation: slideInDown 0.8s ease-out;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            margin: 40px auto;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            animation: scaleIn 1s ease-out 0.3s both;
+            position: relative;
+        }
+
+        .hero-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 217, 61, 0.2) 0%, transparent 100%);
+            z-index: 1;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(1.1) contrast(1.05);
+        }
+
+        .tagline {
+            font-family: 'Oswald', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 500;
+            color: var(--deep-black);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            padding: 100px 20px;
+            background: var(--deep-black);
+            position: relative;
+        }
+
+        .menu-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            box-shadow: 0 0 30px rgba(255, 217, 61, 0.6);
+        }
+
+        .section-title {
+            font-family: 'Righteous', cursive;
+            font-size: clamp(3rem, 8vw, 5rem);
+            text-align: center;
+            margin-bottom: 80px;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 80px rgba(255, 217, 61, 0.3);
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .menu-item {
+            background: var(--soft-black);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            position: relative;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .menu-item:nth-child(1) { animation-delay: 0.1s; }
+        .menu-item:nth-child(2) { animation-delay: 0.2s; }
+        .menu-item:nth-child(3) { animation-delay: 0.3s; }
+        .menu-item:nth-child(4) { animation-delay: 0.4s; }
+        .menu-item:nth-child(5) { animation-delay: 0.5s; }
+        .menu-item:nth-child(6) { animation-delay: 0.6s; }
+        .menu-item:nth-child(7) { animation-delay: 0.7s; }
+        .menu-item:nth-child(8) { animation-delay: 0.8s; }
+        .menu-item:nth-child(9) { animation-delay: 0.9s; }
+        .menu-item:nth-child(10) { animation-delay: 1s; }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--primary-yellow);
+            box-shadow: 
+                0 20px 50px rgba(255, 217, 61, 0.3),
+                0 0 0 1px var(--primary-yellow);
+        }
+
+        .menu-item:hover::before {
+            opacity: 0.1;
+        }
+
+        .menu-item-image {
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .menu-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            filter: brightness(0.95);
+        }
+
+        .menu-item:hover .menu-item-image img {
+            transform: scale(1.15);
+            filter: brightness(1.1);
+        }
+
+        .menu-item-name {
+            padding: 25px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            line-height: 1.4;
+            text-align: center;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--primary-yellow);
+            text-shadow: 0 2px 10px rgba(255, 217, 61, 0.3);
+            position: relative;
+            z-index: 1;
+            text-rendering: optimizeLegibility;
+        }
+
+        /* Footer / Contact Section */
+        .footer {
+            background: var(--gradient-2);
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            margin-top: 100px;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-yellow), transparent);
+            box-shadow: 0 0 40px rgba(255, 217, 61, 0.8);
+        }
+
+        .footer-title {
+            font-family: 'Righteous', cursive;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            color: var(--deep-black);
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.3);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .footer-content {
+            max-width: 700px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .restaurant-name {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--deep-black);
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .restaurant-address {
+            font-size: 1.1rem;
+            color: var(--soft-black);
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            background: rgba(26, 26, 26, 0.3);
+            padding: 25px 35px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(26, 26, 26, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(26, 26, 26, 0.5);
+            border-color: var(--deep-black);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-label {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--deep-black);
+            margin-bottom: 8px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .contact-value {
+            font-size: 1.3rem;
+            color: var(--soft-black);
+            font-weight: 600;
+        }
+
+        .contact-value a {
+            color: var(--soft-black);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-value a:hover {
+            color: var(--deep-black);
+            text-shadow: 0 0 10px rgba(26, 26, 26, 0.3);
+        }
+
+        /* Review Button */
+        .review-button {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 18px 45px;
+            background: var(--gradient-1);
+            color: var(--deep-black);
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            border-radius: 50px;
+            border: 3px solid var(--deep-black);
+            box-shadow: 0 10px 30px rgba(255, 217, 61, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .review-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 217, 61, 0.6);
+            background: var(--dark-yellow);
+        }
+
+        .review-button:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Large Screens */
+        @media (min-width: 1920px) {
+            .modal-content {
+                max-width: 1400px;
+            }
+
+            .modal-image {
+                min-height: 700px;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .language-switcher {
+                top: 15px;
+                right: 15px;
+                padding: 6px 10px;
+            }
+
+            .nav-menu {
+                top: 15px;
+                left: 15px;
+                padding: 8px 15px;
+                gap: 10px;
+            }
+
+            .nav-item {
+                font-size: 0.85rem;
+                padding: 6px 10px;
+            }
+
+            .lang-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 20px;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 15px;
+            }
+
+            .hero {
+                padding: 100px 20px 40px;
+                min-height: 90vh;
+            }
+
+            .logo-title {
+                font-size: 4rem;
+            }
+
+            .logo-image {
+                width: 90px;
+                height: 90px;
+            }
+
+            .hero-image {
+                max-width: 100%;
+                height: 300px;
+                margin: 30px auto;
+            }
+
+            .menu-section {
+                padding: 60px 15px;
+            }
+
+            .section-title {
+                font-size: 3rem;
+                margin-bottom: 50px;
+            }
+
+            .footer {
+                padding: 60px 20px;
+            }
+
+            .footer-title {
+                font-size: 2.5rem;
+                margin-bottom: 40px;
+            }
+
+            .contact-item {
+                padding: 20px 25px;
+            }
+
+            .menu-item-image {
+                height: 220px;
+            }
+
+            .menu-item-name {
+                font-size: 1.6rem;
+                padding: 20px;
+            }
+
+            .back-button {
+                top: 15px;
+                left: 15px;
+                padding: 12px 25px;
+                font-size: 1.1rem;
+            }
+
+            .modal-content {
+                max-width: 95%;
+                margin: 15px auto;
+                border-radius: 20px;
+            }
+
+            .modal-image-container {
+                max-height: 80vh;
+            }
+
+            .modal-image {
+                min-height: 400px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-title {
+                font-size: 3rem;
+            }
+
+            .nav-menu {
+                top: 10px;
+                left: 10px;
+                padding: 6px 12px;
+                gap: 8px;
+            }
+
+            .nav-item {
+                font-size: 0.75rem;
+                padding: 5px 8px;
+            }
+
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+            }
+
+            .tagline {
+                font-size: 1.3rem;
+            }
+
+            .logo-image {
+                width: 80px;
+                height: 80px;
+            }
+
+            .hero-image {
+                height: 250px;
+                border-radius: 20px;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .menu-item-image {
+                height: 200px;
+            }
+
+            .contact-label {
+                font-size: 1.3rem;
+            }
+
+            .contact-value {
+                font-size: 1.1rem;
+            }
+
+            .back-button {
+                top: 10px;
+                left: 10px;
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+
+            .back-button::before {
+                font-size: 1.2rem;
+            }
+
+            .modal-content {
+                max-width: 98%;
+                margin: 10px auto;
+                border-radius: 15px;
+            }
+
+            .modal-image-container {
+                max-height: 70vh;
+            }
+
+            .modal-image {
+                min-height: 300px;
+            }
+
+            .review-button {
+                padding: 15px 35px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <nav class="nav-menu">
+        <a href="#hero" class="nav-item" data-translate="navHome">Ana səhifə</a>
+        <a href="#menu" class="nav-item" data-translate="navMenu">Menyumuz</a>
+        <a href="#contact" class="nav-item" data-translate="navSupport">Dəstək</a>
+        <a href="#review" class="nav-item" data-translate="navReview">Rəy buraxın</a>
+    </nav>
+
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="lang-btn active" data-lang="az" title="Azərbaycan">🇦🇿</button>
+        <button class="lang-btn" data-lang="ru" title="Русский">🇷🇺</button>
+        <button class="lang-btn" data-lang="en" title="English">🇬🇧</button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="logo-image">
+                <img src="logo.png" alt="Beer Town Logo" onerror="this.style.display='none'">
+            </div>
+            <h1 class="logo-title">Beer Town</h1>
+            <div class="hero-image">
+                <img src="main.png" alt="Beer Town" onerror="this.parentElement.style.background='linear-gradient(135deg, #FFD93D 0%, #F4B400 100%)'">
+            </div>
+            <p class="tagline" data-translate="tagline">Ən yaxşı pivə və dadlı yeməklər</p>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu-section" id="menu">
+        <h2 class="section-title" data-translate="menuTitle">Menyumuzda</h2>
+        <div class="menu-grid">
+            <div class="menu-item" data-menu="setler">
+                <div class="menu-item-image">
+                    <img src="https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/2f6ec18aeda0c1d405a615bcd11b875a.jpg" alt="Setlər">
+                </div>
+                <h3 class="menu-item-name" data-translate="menu1">Setlər</h3>
+            </div>
+            <div class="menu-item" data-menu="main">
+                <div class="menu-item-image">
+                    <img src="https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/0aed78195b3ee34898c6eb6a5cbb6a00.jpg" alt="Əsas yeməklər">
+                </div>
+                <h3 class="menu-item-name" data-translate="menu2">Əsas yeməklər</h3>
+            </div>
+            <div class="menu-item" data-menu="soups">
+                <div class="menu-item-image">
+                    <img src="https://varnapizza.com/wp-content/uploads/2021/02/1-4.jpg" alt="Şorbalar">
+                </div>
+                <h3 class="menu-item-name" data-translate="menu3">Şorbalar</h3>
+            </div>
+            <div class="menu-item" data-menu="cold">
+                <div class="menu-item-image">
+                    <img src="https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/867c37816c0e4ccbc3199d35d5f3e29c.jpg" alt="Soyuq içkilər">
+                </div>
+                <h3 class="menu-item-name" data-translate="menu4">Soyuq içkilər</h3>
+            </div>
+            <div class="menu-item" data-menu="beer">
+                <div class="menu-item-image">
+                    <img src="https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/2c443b8e816839f2decb708864d02a22.jpg" alt="Pivələr">
+                </div>
+                <h3 class="menu-item-name" data-translate="menu5">Pivələr</h3>
+            </div>
+            <div class="menu-item" data-menu="spirits">
+                <div class="menu-item-image">
+                    <img src="https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/49cc71c0687eba1655a37a1e0c3d38fd.jpg" alt="Spirtli içkilər">
+                </div>
+                <h3 class="menu-item-name" data-translate="menu6">Spirtli içkilər</h3>
+            </div>
+            <div class="menu-item" data-menu="salads">
+                <div class="menu-item-image">
+                    <img src="https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/74e9c0b082f7052acf07b7996c028512.jpg" alt="Salatlar">
+                </div>
+                <h3 class="menu-item-name" data-translate="menu7">Salatlar</h3>
+            </div>
+            <div class="menu-item" data-menu="snacks">
+                <div class="menu-item-image">
+                    <img src="https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/baa1a70dd582c611007ef333c1634ac3.jpg" alt="Qəlyanaltılar">
+                </div>
+                <h3 class="menu-item-name" data-translate="menu8">Qəlyanaltılar</h3>
+            </div>
+            <div class="menu-item" data-menu="beersnacks">
+                <div class="menu-item-image">
+                    <img src="https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/a0175058eb7e28e8c6e69fbda6c03d88.jpg" alt="Pivə yanı Qəlyanaltılar">
+                </div>
+                <h3 class="menu-item-name" data-translate="menu9">Pivə yanı Qəlyanaltılar</h3>
+            </div>
+            <div class="menu-item" data-menu="tea">
+                <div class="menu-item-image">
+                    <img src="https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/bd35f90f3eaa62ad29fcb02104ac8600.jpg" alt="Çay və şirniyyatlar">
+                </div>
+                <h3 class="menu-item-name" data-translate="menu10">Çay və şirniyyatlar</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer class="footer" id="contact">
+        <h2 class="footer-title" data-translate="footerTitle">Dəstək</h2>
+        <div class="footer-content">
+            <div class="restaurant-name">The Sunday Bite</div>
+            <div class="restaurant-address">CVJ4+XH2 Beer Town, Baku</div>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-label" data-translate="emailLabel">E-poçt Ünvanı</div>
+                    <div class="contact-value">
+                        <a href="/cdn-cgi/l/email-protection#e6a4838394b2899188d0d2a6818b878f8ac885898b"><span class="__cf_email__" data-cfemail="4d0f28283f19223a237b790d2a202c2421632e2220">[email&#160;protected]</span></a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-label" data-translate="phoneLabel">Telefon Nömrəsi</div>
+                    <div class="contact-value">
+                        <a href="tel:055-712-94-95">055-712-94-95</a>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="https://g.page/r/CZj6ZOt2bEb1EBI/review" target="_blank" rel="noopener noreferrer" class="review-button" data-translate="reviewButton" id="review">Rəy buraxın</a>
+        </div>
+    </footer>
+
+    <!-- Rain Animation -->
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+    <div class="raindrop"></div>
+
+    <!-- Modal for Menu Details -->
+    <div class="modal-overlay" id="menuModal">
+        <button class="back-button" id="closeModal" data-translate="backButton">Geri</button>
+        <div class="modal-content">
+            <div class="modal-image-container">
+                <img class="modal-image" id="modalImage" src="" alt="Menu">
+            </div>
+        </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Translations
+        const translations = {
+            az: {
+                navHome: 'Ana səhifə',
+                navMenu: 'Menyumuz',
+                navSupport: 'Dəstək',
+                navReview: 'Rəy buraxın',
+                tagline: 'Ən yaxşı pivə və dadlı yeməklər',
+                menuTitle: 'Menyumuzda',
+                menu1: 'Setlər',
+                menu2: 'Əsas yeməklər',
+                menu3: 'Şorbalar',
+                menu4: 'Soyuq içkilər',
+                menu5: 'Pivələr',
+                menu6: 'Spirtli içkilər',
+                menu7: 'Salatlar',
+                menu8: 'Qəlyanaltılar',
+                menu9: 'Pivə yanı Qəlyanaltılar',
+                menu10: 'Çay və şirniyyatlar',
+                footerTitle: 'Dəstək',
+                emailLabel: 'E-poçt Ünvanı',
+                phoneLabel: 'Telefon Nömrəsi',
+                backButton: 'Geri',
+                reviewButton: 'Rəy buraxın'
+            },
+            ru: {
+                navHome: 'Главная',
+                navMenu: 'Меню',
+                navSupport: 'Поддержка',
+                navReview: 'Оставить отзыв',
+                tagline: 'Лучшее пиво и вкусная еда',
+                menuTitle: 'В нашем меню',
+                menu1: 'Наборы',
+                menu2: 'Основные блюда',
+                menu3: 'Супы',
+                menu4: 'Холодные напитки',
+                menu5: 'Пиво',
+                menu6: 'Алкогольные напитки',
+                menu7: 'Салаты',
+                menu8: 'Закуски',
+                menu9: 'Закуски к пиву',
+                menu10: 'Чай и сладости',
+                footerTitle: 'Поддержка',
+                emailLabel: 'Адрес электронной почты',
+                phoneLabel: 'Номер телефона',
+                backButton: 'Назад',
+                reviewButton: 'Оставить отзыв'
+            },
+            en: {
+                navHome: 'Home',
+                navMenu: 'Menu',
+                navSupport: 'Support',
+                navReview: 'Leave a Review',
+                tagline: 'The best beer and delicious food',
+                menuTitle: 'On the Menu',
+                menu1: 'Sets',
+                menu2: 'Main Dishes',
+                menu3: 'Soups',
+                menu4: 'Cold Drinks',
+                menu5: 'Beers',
+                menu6: 'Spirits',
+                menu7: 'Salads',
+                menu8: 'Snacks',
+                menu9: 'Beer Snacks',
+                menu10: 'Tea & Sweets',
+                footerTitle: 'Support',
+                emailLabel: 'Email Address',
+                phoneLabel: 'Phone Number',
+                backButton: 'Back',
+                reviewButton: 'Leave a Review'
+            }
+        };
+
+        // Menu detail images mapping
+        const menuImages = {
+            'setler': 'https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/23fece1b59332bcc97b1c03914147414.jpg',
+            'main': 'https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/068b7b554f1fa06ebd3850e71e0f80ba.jpg',
+            'soups': 'https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/b6e097605b844737711d80a254d826fe.jpg',
+            'cold': 'https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/365622c6ff26d06dd2de770c5aa35a03.jpg',
+            'beer': 'https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/f85c658ca7779fc017b323c301de0175.jpg',
+            'spirits': 'https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/f55ab129dc9cb4a0df78c309c309ddbd.jpg',
+            'salads': 'https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/56692ab375af8d9c7192fcceb32edb8c.jpg',
+            'snacks': 'https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/839d8d68fa1ae20cbbb75520f2e97463.jpg',
+            'beersnacks': 'https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/29fa9c9af8204de13373af21f521b2f6.jpg',
+            'tea': 'https://beertown-restaurant.my.canva.site/beer-town-resmi-menyu/_assets/media/287dc2254b077738ced96dcc0c301785.jpg'
+        };
+
+        // Language switcher functionality
+        const langButtons = document.querySelectorAll('.lang-btn');
+        let currentLang = 'az';
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            
+            // Update active button
+            langButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.lang === lang) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Update all translatable elements
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.dataset.translate;
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+        }
+
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                changeLanguage(btn.dataset.lang);
+            });
+        });
+
+        // Modal functionality
+        const modal = document.getElementById('menuModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeModalBtn = document.getElementById('closeModal');
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        // Open modal when menu item is clicked
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const menuType = item.dataset.menu;
+                const imageUrl = menuImages[menuType];
+                
+                if (imageUrl) {
+                    modalImage.src = imageUrl;
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        // Close modal
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        closeModalBtn.addEventListener('click', closeModal);
+
+        // Close modal when clicking outside the image
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Close modal with ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        // Add parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+            
+            // Change navigation color based on section
+            updateNavColor();
+        });
+
+        // Update navigation color based on background
+        function updateNavColor() {
+            const navMenu = document.querySelector('.nav-menu');
+            const langSwitcher = document.querySelector('.language-switcher');
+            const scrollPosition = window.pageYOffset + 100;
+            
+            // Get current section
+            const menuSection = document.getElementById('menu');
+            const contactSection = document.getElementById('contact');
+            
+            let isDarkSection = false;
+            
+            if (menuSection && contactSection) {
+                const menuTop = menuSection.offsetTop;
+                const contactTop = contactSection.offsetTop;
+                const contactBottom = contactTop + contactSection.offsetHeight;
+                
+                // Check if we're in menu or footer section (dark backgrounds)
+                if ((scrollPosition >= menuTop && scrollPosition < contactTop) || 
+                    (scrollPosition >= contactTop && scrollPosition < contactBottom)) {
+                    isDarkSection = true;
+                }
+            }
+            
+            // Update colors
+            if (isDarkSection) {
+                navMenu.style.background = 'rgba(0, 0, 0, 0.5)';
+                navMenu.style.borderColor = 'rgba(255, 217, 61, 0.5)';
+                langSwitcher.style.background = 'rgba(0, 0, 0, 0.5)';
+                langSwitcher.style.borderColor = 'rgba(255, 217, 61, 0.5)';
+                
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.style.color = 'var(--white)';
+                });
+            } else {
+                navMenu.style.background = 'rgba(255, 255, 255, 0.1)';
+                navMenu.style.borderColor = 'rgba(255, 217, 61, 0.3)';
+                langSwitcher.style.background = 'rgba(255, 255, 255, 0.1)';
+                langSwitcher.style.borderColor = 'rgba(255, 217, 61, 0.3)';
+                
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.style.color = 'var(--deep-black)';
+                });
+            }
+        }
+        
+        // Initial check
+        updateNavColor();
+    </script>
+</body>
+</html>
